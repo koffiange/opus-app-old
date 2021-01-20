@@ -1,0 +1,149 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/prestige">
+
+    <div class="layout-topbar">
+        <div class="layout-topbar-logo">
+            <h:link outcome="/empty">
+                <p:graphicImage styleClass="logo" name="images/logo.png" library="prestige-layout" />
+            </h:link>
+        </div>
+        <a class="layout-menu-button" href="#">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ul class="layout-topbar-menu" role="menu">
+            <!--
+            <li class="layout-topbar-item">
+                <a href="#" class="layout-topbar-icon first">
+                    <i class="topbar-icon fa fa-cog"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="#" class="layout-topbar-icon">
+                            <i class="topbar-icon fa fa-bookmark"></i>
+                        </a>
+                        <div class="layout-quickmenu-tooltip">
+                            <div class="layout-quickmenu-tooltip-arrow"></div>
+                            <div class="layout-quickmenu-tooltip-text">Bookmarks</div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="layout-topbar-icon">
+                            <i class="topbar-icon fa fa-bar-chart"></i>
+                        </a>
+                        <div class="layout-quickmenu-tooltip">
+                            <div class="layout-quickmenu-tooltip-arrow"></div>
+                            <div class="layout-quickmenu-tooltip-text">Statistics</div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="layout-topbar-icon">
+                            <i class="topbar-icon fa fa-sign-out"></i>
+                        </a>
+                        <div class="layout-quickmenu-tooltip">
+                            <div class="layout-quickmenu-tooltip-arrow"></div>
+                            <div class="layout-quickmenu-tooltip-text">Sign Out</div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="layout-topbar-item">
+                <a href="#" class="layout-topbar-icon first">
+                    <i class="topbar-icon fa fa-calendar"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="#" class="layout-topbar-text">
+                            SUN
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="layout-topbar-text">
+                            MON
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="layout-topbar-text">
+                            TUE
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            -->
+            <li role="menuitem" class="topbar-search layout-topbar-item">
+                <a href="#" class="layout-topbar-icon first">
+                    <i class="topbar-icon fa fa-search"></i>
+                </a>
+                <input type="text" placeholder="Chercher un profil..." />
+            </li>
+            <li class="user-profile" role="menuitem">
+                <a href="#">
+                    <div class="user-profile-info profile-link">
+                        <span class="user-profile-name">Joseph Le Charpentier</span>
+                        <span class="user-profile-role">St. Patron des Travailleurs</span>
+                    </div>
+                    <p:graphicImage styleClass="logo" name="images/avatar/avatar-ava.jpg" library="prestige-layout" />
+                </a>
+                <ul>
+                    <li class="profile-detail">
+                        <div class="user-profile-info">
+                            <p:graphicImage styleClass="logo" name="images/avatar/avatar-ava.jpg"
+                                library="prestige-layout" />
+                            <div class="profile-info">
+                                <span class="user-profile-name">Joseph Le Charpentier</span>
+                                <span class="user-profile-role">St. Patron des Travailleurs</span>
+                            </div>
+                            <a href="#" class="profile-detail-icon">
+                                <i class="fa fa-sign-out"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user"></i>
+                            <div class="menu-text">
+                                <span class="menu-title">Profil</span>
+                                <span class="menu-subtitle">Modifier votre profil</span>
+                            </div>
+
+                            <i class="right-icon fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cog"></i>
+                            <div class="menu-text">
+                                <span class="menu-title">Settings</span>
+                                <span class="menu-subtitle">Dashboard Settings</span>
+                            </div>
+                            <i class="right-icon fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-inbox"></i>
+                            <div class="menu-text">
+                                <span class="menu-title">Messages</span>
+                                <span class="menu-subtitle">You have a <div class="blue">3 new</div> messages</span>
+                            </div>
+                            <i class="right-icon fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-globe"></i>
+                            <div class="menu-text">
+                                <span class="menu-title">Notification</span>
+                                <span class="menu-subtitle">No new notification</span>
+                            </div>
+                            <i class="right-icon fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                    -->
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</ui:composition>

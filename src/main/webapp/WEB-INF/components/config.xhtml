@@ -1,0 +1,126 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <div id="layout-config" class="layout-config">
+        <div class="layout-config-content">
+            <a href="#" id="layout-config-button" class="layout-config-button">
+                <i class="fa fa-cog"></i>
+            </a>
+            <a href="#" class="layout-config-close">
+                <i class="fa fa-times"></i>
+            </a>
+            <h:form id="config-form">
+                <p:tabView id="config-form-tabs">
+                    <p:tab title="Layout Customization">
+                        <h1>Wrapper Modes</h1>
+                        <p:outputPanel id="wrappermodes-panel">
+                            <div class="p-grid">
+                                <div class="p-col p-col-fixed">
+                                    <p:commandLink styleClass="layout-config-option" actionListener="#{guestPreferences.setWrapperMode('')}" update=":config-form:config-form-tabs:wrappermodes-panel"
+                                                   oncomplete="PrimeFaces.PrestigeConfigurator.changeWrapperToBoxed()">
+                                        <p:graphicImage name="images/configurator/wrapper/Boxed.png" library="prestige-layout" title="Boxed" style="width:100%"/>
+                                        <ui:fragment rendered="#{guestPreferences.wrapperMode eq ''}">
+                                            <i class="fa fa-check"></i>
+                                        </ui:fragment>
+                                    </p:commandLink>
+                                </div>
+                                <div class="p-col p-col-fixed">
+                                    <p:commandLink styleClass="layout-config-option" actionListener="#{guestPreferences.setWrapperMode('layout-fullwidth')}" update=":config-form:config-form-tabs:wrappermodes-panel"
+                                                   oncomplete="PrimeFaces.PrestigeConfigurator.changeWrapperToFullWidth()">
+                                        <p:graphicImage name="images/configurator/wrapper/FullWidth.png" library="prestige-layout" title="FullWidth"  style="width:100%"/>
+                                        <ui:fragment rendered="#{guestPreferences.wrapperMode == 'layout-fullwidth'}">
+                                            <i class="fa fa-check"></i>
+                                        </ui:fragment>
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </p:outputPanel>
+
+                        <h1>Menu Modes</h1>
+                        <p:outputPanel id="menumodes-panel">
+                            <div class="p-grid">
+                                <div class="p-col p-col-fixed">
+                                    <p:commandLink styleClass="layout-config-option" actionListener="#{guestPreferences.setMenuMode('layout-menu-horizontal')}" update=":config-form:config-form-tabs:menumodes-panel"
+                                                   oncomplete="PrimeFaces.PrestigeConfigurator.changeMenuToHorizontal()">
+                                        <p:graphicImage name="images/configurator/menu/horizontal.png" library="prestige-layout" title="Horizontal" style="width:100%"/>
+                                        <ui:fragment rendered="#{guestPreferences.menuMode eq 'layout-menu-horizontal'}">
+                                            <i class="fa fa-check"></i>
+                                        </ui:fragment>
+                                    </p:commandLink>
+                                </div>
+                                <div class="p-col p-col-fixed">
+                                    <p:commandLink styleClass="layout-config-option" actionListener="#{guestPreferences.setMenuMode('layout-menu-overlay')}" update=":config-form:config-form-tabs:menumodes-panel"
+                                                   oncomplete="PrimeFaces.PrestigeConfigurator.changeMenuToOverlay()">
+                                        <p:graphicImage name="images/configurator/menu/overlay.png" library="prestige-layout" title="Overlay"  style="width:100%"/>
+                                        <ui:fragment rendered="#{guestPreferences.menuMode == 'layout-menu-overlay'}">
+                                            <i class="fa fa-check"></i>
+                                        </ui:fragment>
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </p:outputPanel>
+
+                        <h1>Colored Themes</h1>
+                        <p:outputPanel id="layoutthemecolored-panel">
+                            <div class="p-grid">
+                                <ui:repeat value="#{guestPreferences.layoutThemesColored}" var="layoutTheme">
+                                    <div class="p-col p-col-fixed colors">
+                                        <p:commandLink styleClass="layout-config-option" actionListener="#{guestPreferences.changeLayoutThemeColored(layoutTheme)}" update=":config-form:config-form-tabs:layoutthemecolored-panel :config-form:config-form-tabs:layoutthemeimages-panel"
+                                                       onstart="PrimeFaces.PrestigeConfigurator.beforeResourceChange()" style="background-image: linear-gradient(to right,#{layoutTheme.color1},#{layoutTheme.color2})"
+                                                       oncomplete="PrimeFaces.PrestigeConfigurator.changeLayout('#{layoutTheme.file}', '#{layoutTheme.componentTheme}')">
+                                            <ui:fragment rendered="#{layoutTheme.file eq guestPreferences.layout}">
+                                                <i class="fa fa-check"></i>
+                                            </ui:fragment>
+                                        </p:commandLink>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </p:outputPanel>
+
+                        <h1>Images Themes</h1>
+                        <p:outputPanel id="layoutthemeimages-panel">
+                            <div class="p-grid">
+                                <ui:repeat value="#{guestPreferences.layoutThemesImages}" var="layoutTheme">
+                                    <div class="p-col p-col-fixed colors">
+                                        <p:commandLink styleClass="layout-config-option" actionListener="#{guestPreferences.changeLayoutThemeImages(layoutTheme)}" update=":config-form:config-form-tabs:layoutthemeimages-panel config-form:config-form-tabs:layoutthemecolored-panel"
+                                                       onstart="PrimeFaces.PrestigeConfigurator.beforeResourceChange()"
+                                                       oncomplete="PrimeFaces.PrestigeConfigurator.changeLayout('#{layoutTheme.file}', '#{layoutTheme.componentTheme}')">
+                                            <p:graphicImage name="images/configurator/layout/#{layoutTheme.image}" library="prestige-layout" title="#{layoutTheme.name}" />
+                                            <ui:fragment rendered="#{layoutTheme.file eq guestPreferences.layout}">
+                                                <i class="fa fa-check"></i>
+                                            </ui:fragment>
+                                        </p:commandLink>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </p:outputPanel>
+                    </p:tab>
+
+                    <p:tab title="Component Themes">
+                        <p:outputPanel id="componentthemes-panel">
+                            <div class="p-grid">
+                                <ui:repeat value="#{guestPreferences.componentThemes}" var="componentTheme">
+                                    <div class="p-col p-col-fixed colors">
+                                        <p:commandLink styleClass="layout-config-option" actionListener="#{guestPreferences.setTheme(componentTheme.file)}" update=":config-form:config-form-tabs:componentthemes-panel"
+                                            onstart="PrimeFaces.PrestigeConfigurator.beforeResourceChange()"
+                                            oncomplete="PrimeFaces.PrestigeConfigurator.changeComponentsTheme('#{componentTheme.file}')">
+                                            <p:graphicImage name="images/configurator/theme/#{componentTheme.image}" library="prestige-layout" title="#{componentTheme.name}" />
+                                            <ui:fragment rendered="#{componentTheme.file eq guestPreferences.theme}">
+                                                <i class="fa fa-check"></i>
+                                            </ui:fragment>
+                                        </p:commandLink>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </p:outputPanel>
+                    </p:tab>
+                </p:tabView>
+            </h:form>
+        </div>
+        
+    </div>
+</ui:composition>

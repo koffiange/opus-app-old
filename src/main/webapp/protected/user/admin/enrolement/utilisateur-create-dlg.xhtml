@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      lang="fr">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+    </f:facet>
+    <title><ui:insert name="title">Nouvel Utilisateur</ui:insert></title>
+    <h:outputScript name="js/layout.js" library="prestige-layout" />
+    <ui:insert name="head"/>
+    <style type="text/css">
+        body{
+            background-color: #ffffff !important;
+            background-image: none !important;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+
+    <h:form id="createForm">
+        <p:growl id="growl" sticky="true" showDetail="true"/>
+        <p:importEnum type="ci.siracide.opus.enumeration.Genre" var="Genre" allSuffix="ALL_ITEMS_VALUES"/>
+        <p:importEnum type="ci.siracide.opus.enumeration.Diplome" var="Diplome" allSuffix="ALL_ITEMS_VALUES"/>
+        <p:importEnum type="ci.siracide.opus.enumeration.Domaine" var="Domaine" allSuffix="ALL_ITEMS_VALUES"/>
+        <p:wizard flowListener="#{utilisateurCreateBacking.onFlowProcess}" backLabel="Précédent" nextLabel="Suivant">
+            <p:tab id="info" title="Informations Générales">
+                <p:panel header="Informations Générales">
+                    <div class="ui-g">
+                        <div class="ui-g-4">
+                            <p:outputLabel for="nom" value="Nom" styleClass="text-bold"/><br/>
+                            <p:inputText id="nom" value="#{utilisateurCreateBacking.utilisateur.nom}" style="width: 95% !important"/>
+                        </div>
+                        <div class="ui-g-4">
+                            <p:outputLabel for="prenoms" value="Prenoms" styleClass="text-bold"/><br/>
+                            <p:inputText id="prenoms" value="#{utilisateurCreateBacking.utilisateur.prenoms}" style="width: 95% !important"/>
+                        </div>
+                        <div class="ui-g-4">
+                            <p:outputLabel for="dateNaissance" value="Date de Naissance" styleClass="text-bold"/><br/>
+                            <p:inputMask id="dateNaissance" value="#{utilisateurCreateBacking.dateNaissance}" mask="99/99/9999" style="width: 95% !important"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-4">
+                            <p:outputLabel for="genre" value="Genre" styleClass="text-bold"/><br/>
+                            <p:selectOneRadio id="genre" value="#{utilisateurCreateBacking.utilisateur.genre}" layout="grid" columns="2">
+                                <f:selectItems value="#{Genre.ALL_ITEMS_VALUES}" var="genre" itemLabel="#{genre}" itemValue="#{genre}"/>
+                            </p:selectOneRadio>
+                        </div>
+                        <div class="ui-g-4">
+                            <p:outputLabel for="email" value="Email" styleClass="text-bold"/><br/>
+                            <p:inputText id="email" value="#{utilisateurCreateBacking.utilisateur.email}" style="width: 95% !important"/>
+                        </div>
+                        <div class="ui-g-4">
+                            <p:outputLabel for="motPass" value="Mot de Passe" styleClass="text-bold"/><br/>
+                            <p:inputText id="motPass" value="#{utilisateurCreateBacking.utilisateur.motDePasse}" placeholder="jubile2021" style="width: 95% !important" disabled="true"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-4">
+                            <p:outputLabel for="contactPrincipal" value="Contact Principal" styleClass="text-bold"/><br/>
+                            <p:inputText id="contactPrincipal" value="#{utilisateurCreateBacking.utilisateur.contactPrincipal}" style="width: 95% !important"
+                                         maxlength="10"/>
+                        </div>
+                        <div class="ui-g-4">
+                            <p:outputLabel for="contactSecondaire" value="Contact Secondaire" styleClass="text-bold"/><br/>
+                            <p:inputText id="contactSecondaire" value="#{utilisateurCreateBacking.utilisateur.contactSecondaire}" style="width: 95% !important"
+                                         maxlength="10"/>
+                        </div>
+                        <div class="ui-g-4">
+                            <p:outputLabel for="adresse" value="Adresse" styleClass="text-bold"/><br/>
+                            <p:inputText id="adresse" value="#{utilisateurCreateBacking.utilisateur.adresse}" style="width: 95% !important"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-4">
+                            <p:outputLabel for="estEnQueteEmploi" value="Je suis en quête d'emploi" styleClass="text-bold"/><br/>
+                            <p:inputSwitch id="estEnQueteEmploi" value="#{utilisateurCreateBacking.utilisateur.estEnQueteEmploi}"
+                                           style="width: 95% !important" onLabel="OUI" offLabel="NON"/>
+                        </div>
+                        <div class="ui-g-4">
+                            <p:outputLabel for="estEnPoste" value="Je suis en poste dans une entreprise" styleClass="text-bold"/><br/>
+                            <p:inputSwitch id="estEnPoste" value="#{utilisateurCreateBacking.utilisateur.estEnPoste}"
+                                           style="width: 95% !important" onLabel="OUI" offLabel="NON" showLabels="true">
+                                <p:ajax listener="#{utilisateurCreateBacking.onEstEnPosteSwitch}" update="@form:estEnPosteFls"/>
+                            </p:inputSwitch>
+                        </div>
+                        <div class="ui-g-4">
+                            <p:outputLabel for="estEntrepreneur" value="Je suis entrepreneur à temps plein ou partiel" styleClass="text-bold"/><br/>
+                            <p:inputSwitch id="estEntrepreneur" value="#{utilisateurCreateBacking.utilisateur.estEntrepreneur}"
+                                           style="width: 95% !important" onLabel="OUI" offLabel="NON"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-12">
+                            <p:outputLabel for="motCle" value="Quelques mots clés pour vous retrouver" />
+                            <p:chips id="motCle" value="#{utilisateurCreateBacking.utilisateur.motsCles}" style="width: 95% !important"/>
+                        </div>
+                    </div>
+                </p:panel>
+
+                <p:spacer height="10" width="1"/>
+
+                <p:outputPanel id="estEnPosteFls">
+                    <p:fieldset legend="Informations complémentaires consernant le poste que vous occupez en entreprise"
+                                rendered="#{utilisateurCreateBacking.utilisateur.estEnPoste}">
+                        <div class="ui-g">
+                            <div class="ui-g-4">
+                                <p:outputLabel for="metier" value="Métier" styleClass="text-bold"/><br/>
+                                <p:inputText id="metier" value="#{utilisateurCreateBacking.utilisateur.metier}" style="width: 95% !important"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel for="descriptionMetier" value="Description du métier" styleClass="text-bold"/><br/>
+                                <p:inputText id="descriptionMetier" value="#{utilisateurCreateBacking.utilisateur.descriptionMetier}" style="width: 95% !important"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel for="employeur" value="Employeur" styleClass="text-bold"/><br/>
+                                <p:inputText id="employeur" value="#{utilisateurCreateBacking.utilisateur.employeur}" style="width: 95% !important"/>
+                            </div>
+                        </div>
+                    </p:fieldset>
+                </p:outputPanel>
+                <p:spacer height="5" width="1"/>
+
+            </p:tab>
+
+            <p:tab id="formation" title="Formations academiques">
+                <p:panel header="Formations academiques">
+                    <p:outputPanel id="formationOpl">
+                        <div class="ui-g">
+                            <div class="ui-g-4">
+                                <p:outputLabel for="diplome" value="Diplôme" styleClass="text-bold"/><br/>
+                                <p:selectOneMenu id="diplome" value="#{utilisateurCreateBacking.formation.diplome}"  style="width: 100% !important;">
+                                    <f:selectItems value="#{Diplome.ALL_ITEMS_VALUES}" var="diplome" itemValue="#{diplome}" itemLabel="#{diplome.sigle} - #{diplome.libelle}" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="ui-g-5">
+                                <p:outputLabel for="filiere" value="Filière" styleClass="text-bold"/><br/>
+                                <p:inputText id="filiere" value="#{utilisateurCreateBacking.formation.filiere}" style="width: 100% !important;"/>
+                            </div>
+                            <div class="ui-g-2">
+                                <p:outputLabel for="annee" value="Année d'obtention" styleClass="text-bold"/><br/>
+                                <p:inputText id="annee" value="#{utilisateurCreateBacking.formation.annee}"/>
+                            </div>
+                            <div class="ui-g-1">
+                                <br/>
+                                <p:commandButton value="Ajouter" icon="fa fa-plus" action="#{utilisateurCreateBacking.addFormation()}"
+                                                 style="width: 100% !important;" update="@form:formation:formationDT @form:formationOpl"/>
+                            </div>
+                        </div>
+                    </p:outputPanel>
+
+                    <p:dataTable id="formationDT" value="#{utilisateurCreateBacking.formationList}" var="formation" rowIndexVar="index">
+                        <p:column headerText="#" style="width: 20px;"><h:outputText value="#{index+1}"/></p:column>
+                        <p:column headerText="Diplome"><h:outputText value="#{formation.diplome.libelle}"/></p:column>
+                        <p:column headerText="Filière"><h:outputText value="#{formation.filiere}"/></p:column>
+                        <p:column headerText="Année Obtention"><h:outputText value="#{formation.annee}"/></p:column>
+                        <p:column>
+                            <p:commandButton value="Supprimer" icon="fa fa-trash" action="#{utilisateurCreateBacking.deleteFormation(formation)}"
+                                             style="width: 100% !important;" update="@form:formation:formationDT @form:formation:formationOpl"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="competence" title="Compétences">
+                <p:panel header="Au delà de vos compétences académiques, que savez-vous faire? ">
+                    <p:outputPanel id="competenceOpl">
+                        <div class="ui-g">
+                            <div class="ui-g-5">
+                                <p:outputLabel for="competenceLibelle" value="Compétence" styleClass="text-bold"/><br/>
+                                <p:inputText id="competenceLibelle" value="#{utilisateurCreateBacking.competence.libelle}"
+                                             style="width: 100% !important;" placeholder="Je sais cuisiner"/>
+                            </div>
+                            <div class="ui-g-6">
+                                <p:outputLabel for="competenceDescription" value="Description" styleClass="text-bold"/><br/>
+                                <p:inputText id="competenceDescription" value="#{utilisateurCreateBacking.competence.description}"
+                                             style="width: 100% !important;" placeholder="Je fais des amuse-bouches pour les fêtes"/>
+                            </div>
+                            <div class="ui-g-1">
+                                <br/>
+                                <p:commandButton value="Ajouter" icon="fa fa-plus" action="#{utilisateurCreateBacking.addCompetence()}"
+                                                 style="width: 100% !important;" update="@form:competence:competenceDT @form:competenceOpl"/>
+                            </div>
+                        </div>
+                    </p:outputPanel>
+
+                    <p:dataTable id="competenceDT" value="#{utilisateurCreateBacking.competenceList}" var="competence" rowIndexVar="index">
+                        <p:column headerText="#" style="width: 20px;"><h:outputText value="#{index+1}"/></p:column>
+                        <p:column headerText="Compétences"><h:outputText value="#{competence.libelle}"/></p:column>
+                        <p:column headerText="Description"><h:outputText value="#{competence.description}"/></p:column>
+                        <p:column>
+                            <p:commandButton value="Supprimer" icon="fa fa-trash" action="#{utilisateurCreateBacking.deleteCompetence(competence)}"
+                                             style="width: 100% !important;" update="@form:competence:competenceDT @form:competenceOpl"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </p:tab>
+            <p:tab id="business" title="Activités Entrepreneuriales">
+                <p:panel header="Activités Entrepreneuriales">
+                    <p:outputPanel id="businessOpl">
+                        <div class="ui-g">
+                            <div class="ui-g-8">
+                                <p:outputLabel for="businessLibelle" value="Libelle" styleClass="text-bold"/><br/>
+                                <p:inputText id="businessLibelle" value="#{utilisateurCreateBacking.business.libelle}" style="width: 100% !important;"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel for="businessDomaine" value="Domaine" styleClass="text-bold"/><br/>
+                                <p:selectOneMenu id="businessDomaine" value="#{utilisateurCreateBacking.business.domaine}" filter="true" filterMatchMode="contains"
+                                                 style="width: 100% !important;">
+                                    <f:selectItem itemLabel="-- Domaines --"/>
+                                    <f:selectItems value="#{Domaine.ALL_ITEMS_VALUES}" var="d" itemLabel="#{d.libelle}" itemValue="#{d}"/>
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="ui-g-12">
+                                <p:outputLabel for="businessDescription" value="Description" styleClass="text-bold"/><br/>
+                                <p:inputText id="businessDescription" value="#{utilisateurCreateBacking.business.description}" style="width: 100% !important;"
+                                             placeholder="Liste des articles, services ou autre détails"/>
+                            </div>
+                            <div class="ui-g-5">
+                                <p:outputLabel for="businessFacebook" value="Facebook" styleClass="text-bold"/><br/>
+                                <p:inputText id="businessFacebook" value="#{utilisateurCreateBacking.business.facebook}" style="width: 100% !important;"/>
+                            </div>
+                            <div class="ui-g-5">
+                                <p:outputLabel for="businessInsta" value="Instagram" styleClass="text-bold"/><br/>
+                                <p:inputText id="businessInsta" value="#{utilisateurCreateBacking.business.instagram}" style="width: 100% !important;"/>
+                            </div>
+                            <div class="ui-g-2">
+                                <br/>
+                                <p:commandButton value="Ajouter" icon="fa fa-plus" action="#{utilisateurCreateBacking.addBusiness()}" styleClass="btn-block"
+                                                 style="width: 100% !important;" update="@form:business:businessDT @form:businessOpl"/>
+                            </div>
+                        </div>
+                    </p:outputPanel>
+
+                    <p:dataTable id="businessDT" value="#{utilisateurCreateBacking.businessList}" var="business" rowIndexVar="index">
+                        <p:column headerText="#" style="width: 20px;"><h:outputText value="#{index+1}"/></p:column>
+                        <p:column headerText="Libelle"><h:outputText value="#{business.libelle}"/></p:column>
+                        <p:column headerText="Domaine"><h:outputText value="#{business.domaine.libelle}"/></p:column>
+                        <p:column headerText="Description"><h:outputText value="#{business.description}"/></p:column>
+                        <p:column headerText="Réseaux sociaux">
+                            <i class="fa fa-facebook"></i> : <h:outputText value="#{business.facebook}"/><br/>
+                            <i class="fa fa-instagram"></i> : <h:outputText value="#{business.instagram}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Supprimer" icon="fa fa-trash" action="#{utilisateurCreateBacking.deleteBusiness(business)}"
+                                             style="width: 100% !important;" update="@form:competence:businessDT @form:businessOpl"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </p:tab>
+            <p:tab id="recapitulatif" title="Recapitulatif">
+                <p:panel header="Recapitulatif des informations saisies">
+                    <p:fieldset legend="Informations Générales">
+                        <div class="ui-g">
+                            <div class="ui-g-4">
+                                <p:outputLabel for="nom" value="Nom" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.nom}" style="width: 95% !important"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel for="prenoms" value="Prenoms" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.prenoms}" style="width: 95% !important"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel for="dateNaissance" value="Date de Naissance" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.dateNaissance}" style="width: 95% !important"/>
+                            </div>
+                        </div>
+
+                        <div class="ui-g">
+                            <div class="ui-g-4">
+                                <p:outputLabel value="Genre" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.genre}" style="width: 95% !important"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel value="Email" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.email}" style="width: 95% !important"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel value="Mot de Passe" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.motDePasse}"/>
+                            </div>
+                        </div>
+
+                        <div class="ui-g">
+                            <div class="ui-g-4">
+                                <p:outputLabel for="contactPrincipal" value="Contact Principal" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.contactPrincipal}" style="width: 95% !important" maxlength="10"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel for="contactSecondaire" value="Contact Secondaire" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.contactSecondaire}" style="width: 95% !important" maxlength="10"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel for="adresse" value="Adresse" styleClass="text-bold"/><br/>
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.adresse}" style="width: 95% !important"/>
+                            </div>
+                        </div>
+
+                        <div class="ui-g">
+                            <div class="ui-g-4">
+                                <p:outputLabel value="Je suis en quête d'emploi" styleClass="text-bold"/><br/>
+                                <p:inputSwitch value="#{utilisateurCreateBacking.utilisateur.estEnQueteEmploi}"  disabled="true"
+                                               style="width: 95% !important" onLabel="OUI" offLabel="NON"/>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel value="Je suis en poste dans une entreprise" styleClass="text-bold"/><br/>
+                                <p:inputSwitch value="#{utilisateurCreateBacking.utilisateur.estEnPoste}" disabled="true"
+                                               style="width: 95% !important" onLabel="OUI" offLabel="NON" showLabels="true" >
+                                </p:inputSwitch>
+                            </div>
+                            <div class="ui-g-4">
+                                <p:outputLabel value="Je suis entrepreneur à temps plein ou partiel" styleClass="text-bold"/><br/>
+                                <p:inputSwitch value="#{utilisateurCreateBacking.utilisateur.estEntrepreneur}" disabled="true"
+                                               style="width: 95% !important" onLabel="OUI" offLabel="NON"/>
+                            </div>
+                        </div>
+
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <p:outputLabel value="Quelques mots clés pour vous retrouver" />
+                                <h:outputText value="#{utilisateurCreateBacking.utilisateur.motsCles}" style="width: 95% !important"/>
+                            </div>
+                        </div>
+                    </p:fieldset>
+                    <p:spacer height="20" width="10"/>
+                    <p:fieldset legend="Formations academiques">
+                        <p:dataTable id="recapFormationDT" value="#{utilisateurCreateBacking.formationList}" var="formation" rowIndexVar="index">
+                            <p:column headerText="#" style="width: 20px;"><h:outputText value="#{index+1}"/></p:column>
+                            <p:column headerText="Diplome"><h:outputText value="#{formation.diplome.libelle}"/></p:column>
+                            <p:column headerText="Filière"><h:outputText value="#{formation.filiere}"/></p:column>
+                            <p:column headerText="Année Obtention"><h:outputText value="#{formation.annee}"/></p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+                    <p:spacer height="20" width="10"/>
+                    <p:fieldset legend="Compétences">
+                        <p:dataTable id="recapCompetenceDT" value="#{utilisateurCreateBacking.competenceList}" var="competence" rowIndexVar="index">
+                            <p:column headerText="#" style="width: 20px;"><h:outputText value="#{index+1}"/></p:column>
+                            <p:column headerText="Compétences"><h:outputText value="#{competence.libelle}"/></p:column>
+                            <p:column headerText="Description"><h:outputText value="#{competence.description}"/></p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+                    <p:spacer height="20" width="10"/>
+                    <p:fieldset legend="Activités Entrepreneuriales">
+                        <p:dataTable id="recapBusinessDT" value="#{utilisateurCreateBacking.businessList}" var="business" rowIndexVar="index">
+                            <p:column headerText="#" style="width: 20px;"><h:outputText value="#{index+1}"/></p:column>
+                            <p:column headerText="Libelle"><h:outputText value="#{business.libelle}"/></p:column>
+                            <p:column headerText="Domaine"><h:outputText value="#{business.domaine.libelle}"/></p:column>
+                            <p:column headerText="Description"><h:outputText value="#{business.description}"/></p:column>
+                            <p:column headerText="Réseaux sociaux">
+                                <i class="fa fa-facebook"></i> : <h:outputText value="#{business.facebook}"/><br/>
+                                <i class="fa fa-instagram"></i> : <h:outputText value="#{business.instagram}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+
+                    <div class="ui-g">
+                        <div class="ui-g-4 ui-g-offset-4">
+                            <p:commandButton value="#{messages.btnEnregister}" action="#{utilisateurCreateBacking.persist}" update="@form:growl"
+                            styleClass="btn-block"/>
+                        </div>
+                    </div>
+                </p:panel>
+            </p:tab>
+        </p:wizard>
+    </h:form>
+
+    <h:outputStylesheet name="css/primeflex.css" library="prestige-layout" />
+
+    <h:outputStylesheet name="css/#{guestPreferences.layout}.css" library="prestige-layout" />
+
+</h:body>
+
+</html>

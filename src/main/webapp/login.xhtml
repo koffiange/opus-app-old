@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+    </f:facet>
+    <title>PrimeFaces Prestige - Login</title>
+</h:head>
+
+<h:body styleClass="login-body">
+    <div class="mobile-banner">
+        <p:graphicImage name="images/logo-mobile.svg" library="prestige-layout" />
+    </div>
+    <div class="login-panel">
+        <div class="logo">
+            <p:graphicImage name="images/logo.svg" library="prestige-layout" />
+        </div>
+        <div class="back-icon">
+            <p:button outcome="/dashboard" icon="fa fa-arrow-left" />
+        </div>
+    </div>
+    <div class="login-card">
+        <div class="top-border"></div>
+        <div class="login-content">
+            <h1>Login</h1>
+            <p>Welcome, please use the form to sign-in.</p>
+            <div class="username-container">
+                <h:panelGroup>
+                    <label>Username</label>
+                    <div class="login-input">
+                        <p:inputText placeholder="Enter your username" />
+                    </div>
+                </h:panelGroup>
+            </div>
+            <div class="password-container">
+                <h:panelGroup>
+                    <label>Password</label>
+                    <div class="login-input">
+                        <p:password placeholder="Enter your password" />
+                    </div>
+                </h:panelGroup>
+            </div>
+            <div class="forgetpassword-container">
+                <a href="#" class="forget-password">Forget Password?</a>
+            </div>
+            <div >
+                <p:button value="Sign In" />
+            </div>
+        </div>
+
+    </div>
+    <h:outputStylesheet name="css/layout-steel.css" library="prestige-layout" />
+</h:body>
+
+</html>

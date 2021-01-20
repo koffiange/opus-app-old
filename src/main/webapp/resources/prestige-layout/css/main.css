@@ -1,0 +1,184 @@
+.col-w5{
+    width: 5% !important;
+}
+
+.col-w10{
+    width: 10% !important;
+}
+.col-w15{
+    width: 15% !important;
+}
+.col-w20{
+    width: 20% !important;
+}
+.col-w25{
+    width: 25% !important;
+}
+
+.col-w30{
+    width: 30% !important;
+}
+
+.col-w35{
+    width: 35% !important;
+}
+.col-w40{
+    width: 40% !important;
+}
+.col-w50{
+    width: 50% !important;
+}
+
+.col-w60{
+    width: 60% !important;
+}
+
+.col-w70{
+    width: 70% !important;
+}
+
+.col-w80{
+    width: 80% !important;
+}
+
+.col-w90{
+    width: 90% !important;
+}
+
+.col-w100{
+    width: 100% !important;
+}
+
+.btn-block{
+    width: 100% !important;
+}
+.btn-save {
+    width: 100% !important;
+}
+
+.form-control{
+    width: 95% !important;
+}
+
+.form-control-block{
+    width: 98% !important;
+}
+
+.text-centered{
+    text-align: center !important;
+}
+
+.text-uppercase{
+    text-transform: uppercase !important;
+}
+
+.image-centered{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.col-tableur{
+    font-size: 0.8em !important;
+    font-weight: bold;
+    padding: 4px 4px !important;
+}
+
+.ui-datatable.marginless{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.text-danger{
+    color: #d97c3e !important;
+}
+
+.text-success{
+    color: #35ae47 !important;
+}
+.text-to-left{
+    text-align: left !important;
+}
+
+.text-to-right{
+    text-align: right !important;
+}
+
+.text-to-center{
+    text-align: center !important;
+}
+
+.text-bold{
+    font-weight: bold !important;
+}
+
+.text-bolder{
+    font-weight: bolder !important;
+}
+
+.text-lighter{
+    font-weight: lighter !important;
+}
+
+.text-smaller{
+    font-size: xx-small !important;
+}
+
+.text-x-small{
+    font-size: x-small !important;
+}
+
+.text-small{
+    font-size: small !important;
+}
+
+.text-smaller{
+    font-size: smaller !important;
+}
+
+.text-medium{
+    font-size: medium !important;
+}
+
+.text-large{
+    font-size: large !important;
+}
+
+.text-x-large{
+    font-size: x-large !important;
+}
+
+.text-xx-large{
+    font-size: xx-large !important;
+}
+
+.text-larger{
+    font-size: larger !important;
+}
+
+.text-align-left{
+    text-align: left !important;
+}
+
+.text-align-right{
+    text-align: right !important;
+}
+
+.text-align-center{
+    text-align: center !important;
+}
+
+.preformatted {
+    white-space: pre-wrap !important;
+}
+
+body .ui-overlaypanel{
+    width: 300px;
+    left: 75% !important;
+}
+
+body .dlg{
+    background-color: #ffffff !important;
+    background-image: none !important;
+}
+
