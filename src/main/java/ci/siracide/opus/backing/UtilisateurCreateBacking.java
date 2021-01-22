@@ -55,7 +55,6 @@ public class UtilisateurCreateBacking extends BaseBacking{
     private Competence competence;
     @Getter @Setter
     private Business business;
-
     @Getter @Setter
     private String dateNaissance;
 
@@ -130,7 +129,6 @@ public class UtilisateurCreateBacking extends BaseBacking{
     private void buildUtilisateurDto(){
         utilisateur.setDateNaissance(convertStringIntoLocalDate(dateNaissance));
         motCleList.forEach(s -> utilisateur.setMotsCles(utilisateur.getMotsCles().concat(", "+s)));
-        utilisateur.setMotDePasse("jubile2021");
         utilisateurDto.setUtilisateur(utilisateur);
         utilisateurDto.setFormationList(formationList);
         utilisateurDto.setCompetenceList(competenceList);
@@ -140,9 +138,12 @@ public class UtilisateurCreateBacking extends BaseBacking{
 
     public void persist(){
         this.buildUtilisateurDto();
+        LOG.info("buildUtilisateurDto finish");
         try{
             utilisateurService.persist(utilisateurDto);
+            LOG.info("persist finish");
             closeSuccess();
+            LOG.info("close finish");
         } catch (Exception e){
             showError(e.getMessage());
         }

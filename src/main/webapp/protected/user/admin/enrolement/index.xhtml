@@ -32,23 +32,30 @@
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="20,30,40"
                                      currentPageReportTemplate="{startRecord}-{endRecord} / {totalRecords} enregistrements">
-                            <p:column headerText="#" style="width: 20px; text-align: center;"/>
-                            <p:column headerText="Profil" styleClass="col-w10"><p:graphicImage value="images/avatar/avatar-qin" library="prestige-layout"/> </p:column>
-                            <p:column headerText="Nom et Prénoms" styleClass="col-w30"><h:outputText value="#{utilisateur.prenoms} #{utilisateur.nom}"/> </p:column>
-                            <p:column headerText="Contacts" styleClass="col-w10">
+                            <p:column headerText="#" styleClass="text-align-center col-w5">
+                                <h:outputText value="#{index + 1}"/>
+                            </p:column>
+                            <p:column headerText="Profil" styleClass="text-align-center col-w5">
+                                <i class="fa fa-user #{(utilisateur.photoProfil ne null) ? 'display-none' : ''}" style="font-size: 3rem"/>
+                            </p:column>
+                            <p:column headerText="Nom et Prénoms" styleClass="col-w20">
+                                <h:outputText value="#{utilisateur.prenoms} "/>
+                                <h:outputText value="#{utilisateur.nom}" styleClass="text-capitalized"/>
+                            </p:column>
+                            <p:column headerText="Contacts" styleClass="col-w20">
+                                <u><h:outputText value="#{utilisateur.contactPrincipal}"/></u><br/>
+                                <h:outputText value="#{utilisateur.contactSecondaire}"/><br/>
                                 <h:outputText value="#{utilisateur.email}"/>
-                                <h:outputText value="#{utilisateur.contactPrincipal}"/>
-                                <h:outputText value="#{utilisateur.contactSecondaire}"/>
                             </p:column>
                             <p:column headerText="Situation Professionnelle" styleClass="col-w20">
-                                <h:outputText value="En quête d'emploi : #{utilisateur.email}"/>
-                                <h:outputText value="En poste          : #{utilisateur.contactPrincipal}"/>
-                                <h:outputText value="Entrepreneur      :#{utilisateur.contactSecondaire}"/>
+                                <h:outputText value="En quête d'emploi : #{(utilisateur.estEnQueteEmploi) ? 'OUI' : 'NON'}"/><br/>
+                                <h:outputText value="En poste          : #{(utilisateur.contactPrincipal) ? 'OUI' : 'NON'}"/><br/>
+                                <h:outputText value="Entrepreneur      : #{(utilisateur.contactSecondaire) ? 'OUI' : 'NON'}"/>
                             </p:column>
-                            <p:column headerText="Sexe" styleClass="col-w10">
+                            <p:column headerText="Sexe" styleClass="col-w5">
                                 <h:outputText value="#{utilisateur.genre}"/>
                             </p:column>
-                            <p:column headerText="" styleClass="col-w5">
+                            <p:column headerText="" styleClass="col-w10">
                                 <p:commandButton icon="fa fa-caret-down"
                                                  id="action" type="button"
                                                  value="Actions" styleClass="btn-block"/>
@@ -56,12 +63,20 @@
                                 <p:overlayPanel for="action"
                                                 at="left bottom"
                                                 hideEffect="fade" showCloseIcon="true">
-                                    <p:link value="Consulter Profil" styleClass="text-bold" style="color: #ffffff"
+                                    <i class="fa fa-eye"/> <p:spacer width="10" height="1"/>
+                                    <p:link value="Consulter Profil" styleClass="text-bold"
                                             outcome="/protected/user/admin/enrolement/profil-utilisateur">
                                         <f:param name="uuid" value="#{utilisateur.uuid}"/>
                                     </p:link>
                                     <br/>
-                                    <p:commandLink value="..."
+                                    <i class="fa fa-edit"/> <p:spacer width="10" height="1"/>
+                                    <p:commandLink value="Modifier"
+                                                   actionListener="#{enrolementBacking.fictiveAction}"
+                                                   styleClass="text-bold">
+                                    </p:commandLink>
+                                    <br/>
+                                    <i class="fa fa-trash"/> <p:spacer width="10" height="1"/>
+                                    <p:commandLink value="Supprimer"
                                                    actionListener="#{enrolementBacking.fictiveAction}"
                                                    styleClass="text-bold">
                                     </p:commandLink>

@@ -108,6 +108,10 @@
     text-align: center !important;
 }
 
+.text-capitalized{
+    text-transform: capitalize !important;
+}
+
 .text-bold{
     font-weight: bold !important;
 }
@@ -168,17 +172,119 @@
     text-align: center !important;
 }
 
+.text-fs-10{
+    font-size: 10px !important;
+}
+
+.text-fs-11{
+    font-size: 11px !important;
+}
+
+.text-fs-12{
+    font-size: 12px !important;
+}
+
+.text-fs-13{
+    font-size: 13px !important;
+}
+
+.text-fs-14{
+    font-size: 14px !important;
+}
+
+.text-fs-15{
+    font-size: 15px !important;
+}
+
+.text-fs-16{
+    font-size: 16px !important;
+}
+
+.text-fs-17{
+    font-size: 17px !important;
+}
+
+.text-fs-18{
+    font-size: 18px !important;
+}
+
+.text-fs-19{
+    font-size: 19px !important;
+}
+
+.text-fs-20{
+    font-size: 20px !important;
+}
+
+.text-fs-21{
+    font-size: 21px !important;
+}
+
+.text-fs-22{
+    font-size: 22px !important;
+}
+
+.text-fs-23{
+    font-size: 23px !important;
+}
+
+.text-fs-24{
+    font-size: 24px !important;
+}
+
+.text-fs-25{
+    font-size: 25px !important;
+}
+
+.text-fs-26{
+    font-size: 26px !important;
+}
+
+.text-fs-27{
+    font-size: 27px !important;
+}
+
+.text-fs-28{
+    font-size: 28px !important;
+}
+
+.text-fs-29{
+    font-size: 29px !important;
+}
+
+.text-fs-30{
+    font-size: 30px !important;
+}
+
 .preformatted {
     white-space: pre-wrap !important;
 }
 
+.display-none{
+    display: none;
+}
+
 body .ui-overlaypanel{
-    width: 300px;
+    width: 250px !important;
     left: 75% !important;
 }
+
 
 body .dlg{
     background-color: #ffffff !important;
     background-image: none !important;
+}
+
+.layout-topbar .layout-topbar-menu > li.layout-topbar-item.topbar-search {
+    max-width: 1000px !important;
+    width: 600px !important;
+}
+
+.tag {
+    padding: 3px 5px !important;
+    background-color: #eaf0f6 !important;
+    color: #525e6c !important;
+    border-radius: 5px !important;
+    border: solid 1px #dfe6ee !important;
 }
 

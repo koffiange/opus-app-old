@@ -15,6 +15,7 @@
     </f:facet>
     <title><ui:insert name="title">Nouvel Utilisateur</ui:insert></title>
     <h:outputScript name="js/layout.js" library="prestige-layout" />
+    <h:outputStylesheet name="css/main.css" library="prestige-layout"/>
     <ui:insert name="head"/>
     <style type="text/css">
         body{
@@ -63,7 +64,7 @@
                         </div>
                         <div class="ui-g-4">
                             <p:outputLabel for="motPass" value="Mot de Passe" styleClass="text-bold"/><br/>
-                            <p:inputText id="motPass" value="#{utilisateurCreateBacking.utilisateur.motDePasse}" placeholder="jubile2021" style="width: 95% !important" disabled="true"/>
+                            <p:inputText id="motPass" value="#{utilisateurCreateBacking.utilisateur.motDePasse}" style="width: 95% !important" disabled="true"/>
                         </div>
                     </div>
 
@@ -107,7 +108,7 @@
                     <div class="ui-g">
                         <div class="ui-g-12">
                             <p:outputLabel for="motCle" value="Quelques mots clés pour vous retrouver" />
-                            <p:chips id="motCle" value="#{utilisateurCreateBacking.utilisateur.motsCles}" style="width: 95% !important"/>
+                            <p:chips id="motCle" value="#{utilisateurCreateBacking.motCleList}" addOnPaste="true" unique="true" separator="," styleClass="form-control"/>
                         </div>
                     </div>
                 </p:panel>
@@ -369,7 +370,7 @@
 
                     <div class="ui-g">
                         <div class="ui-g-4 ui-g-offset-4">
-                            <p:commandButton value="#{messages.btnEnregister}" action="#{utilisateurCreateBacking.persist}" update="@form:growl"
+                            <p:commandButton icon="fa fa-save" value="#{messages.btnEnregister}" action="#{utilisateurCreateBacking.persist}" update="@form:growl"
                             styleClass="btn-block"/>
                         </div>
                     </div>

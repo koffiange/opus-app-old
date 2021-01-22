@@ -20,7 +20,7 @@ public class Utilisateur extends BaseDto{
     @Getter @Setter
     private String email;
     @Getter @Setter
-    private String motDePasse;
+    private String motDePasse = "jubile2021";
     @Getter @Setter
     private String contactPrincipal;
     @Getter @Setter
@@ -44,7 +44,7 @@ public class Utilisateur extends BaseDto{
     @Getter @Setter
     private String employeur;
     @Getter @Setter
-    private String motsCles;
+    private String motsCles = "";
 
     public Utilisateur() {
     }

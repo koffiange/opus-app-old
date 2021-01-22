@@ -12,6 +12,10 @@ public interface UtilisateurClient {
     List<Utilisateur> listAll();
 
     @GET
+    @Path("/dto/{uuid}")
+    UtilisateurDto findDtoById(@PathParam("uuid") String uuid);
+
+    @GET
     @Path("/dto")
     List<UtilisateurDto> listAllUtilisateurDto();
 

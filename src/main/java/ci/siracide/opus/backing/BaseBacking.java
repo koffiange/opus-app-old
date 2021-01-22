@@ -242,7 +242,7 @@ public class BaseBacking implements Serializable {
 
     public LocalDate convertStringIntoLocalDate(String date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
-        return LocalDate.parse(date, formatter);
+        return LocalDate.parse(date.replace('/', '-'), formatter);
     }
 
 

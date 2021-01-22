@@ -43,6 +43,11 @@ public class UtilisateurService implements UtilisateurClient {
     }
 
     @Override
+    public UtilisateurDto findDtoById(String uuid) {
+        return client.findDtoById(uuid);
+    }
+
+    @Override
     public List<UtilisateurDto> listAllUtilisateurDto() {
         return client.listAllUtilisateurDto();
     }
